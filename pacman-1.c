@@ -983,85 +983,85 @@ void inicia_fantasmas (char tabuleiro[LINHAS][COLUNAS], struct fantasma *ptr_fan
     posiciona_fantasma(tabuleiro, ptr_fantasma4);
 }
 
-void limpa_caminho(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
+void limpa_caminho(char tabuleiro[LINHAS][COLUNAS], int x, int y, int direcao)
 {
-    switch (ptr_pac->direcao)
+    switch (direcao)
     {
     case 1: /* esquerda */
-        if (tabuleiro[ptr_pac->x][(ptr_pac->y)+2] != 186)
+        if (tabuleiro[x][y+2] != 186)
         {
-            tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)+2] = ' ';
-            tabuleiro[ptr_pac->x][(ptr_pac->y)+2] = ' ';
-            tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)+2] = ' ';
+            tabuleiro[x-1][y+2] = ' ';
+            tabuleiro[x][y+2] = ' ';
+            tabuleiro[x+1][y+2] = ' ';
         }
         break;
     
     case 2: /* direita */
-        if (tabuleiro[ptr_pac->x][(ptr_pac->y)-2] != 186)
+        if (tabuleiro[x][y-2] != 186)
         {
-            tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)-2] = ' ';
-            tabuleiro[ptr_pac->x][(ptr_pac->y)-2] = ' ';
-            tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)-2] = ' ';
+            tabuleiro[x-1][y-2] = ' ';
+            tabuleiro[x][y-2] = ' ';
+            tabuleiro[x+1][y-2] = ' ';
         }
         break;
 
     case 3: /* cima */
-        if (tabuleiro[ptr_pac->x][(ptr_pac->y)+2] != 205)
+        if (tabuleiro[x][y+2] != 205)
         {
-            tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)-1] = ' ';
-            tabuleiro[(ptr_pac->x)+2][ptr_pac->y] = ' ';
-            tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)+1] = ' ';
+            tabuleiro[x+2][y-1] = ' ';
+            tabuleiro[x+2][y] = ' ';
+            tabuleiro[x+2][y+1] = ' ';
         }
         break;
     
     case 4: /* baixo */
-        if (tabuleiro[ptr_pac->x][(ptr_pac->y)-2] != 186)
+        if (tabuleiro[x][y-2] != 186)
         {
-            tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)-1] = ' ';
-            tabuleiro[(ptr_pac->x)-2][ptr_pac->y] = ' ';
-            tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)+1] = ' ';
+            tabuleiro[x-2][y-1] = ' ';
+            tabuleiro[x-2][y] = ' ';
+            tabuleiro[x-2][y+1] = ' ';
         }
         break;
     }
 }
 
-void limpa_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
+void limpa_estrutura(char tabuleiro[LINHAS][COLUNAS], int x, int y)
 {
-    tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)+1] = ' ';
-    tabuleiro[ptr_pac->x][(ptr_pac->y)+1] = ' ';
-    tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)+1] = ' ';
-    tabuleiro[(ptr_pac->x)-1][ptr_pac->y] = ' ';
-    tabuleiro[ptr_pac->x][ptr_pac->y] = ' ';
-    tabuleiro[(ptr_pac->x)+1][ptr_pac->y] = ' ';
-    tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)-1] = ' ';
-    tabuleiro[ptr_pac->x][(ptr_pac->y)-1] = ' ';
-    tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)-1] = ' ';
+    tabuleiro[x-1][y+1] = ' ';
+    tabuleiro[x][y+1] = ' ';
+    tabuleiro[x+1][y+1] = ' ';
+    tabuleiro[x-1][y] = ' ';
+    tabuleiro[x][y] = ' ';
+    tabuleiro[x+1][y] = ' ';
+    tabuleiro[x-1][y-1] = ' ';
+    tabuleiro[x][y-1] = ' ';
+    tabuleiro[x+1][y-1] = ' ';
 }
 
 
-int parede (char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int direcao)
+int parede (char tabuleiro[LINHAS][COLUNAS], int x, int y, int direcao)
 {
     if (direcao == 1) /* esquerda */
     {
-        if ((tabuleiro[ptr_pac->x][(ptr_pac->y)-2] == ' ' || tabuleiro[ptr_pac->x][(ptr_pac->y)-2] == 79 || tabuleiro[ptr_pac->x][(ptr_pac->y)-2] == '@') && (tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)-2] == ' ' || tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)-2] == 79 || tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)-2] == '@') && (tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)-2] == ' ' || tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)-2] == 79 || tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)-2] == '@'))
+        if ((tabuleiro[x][y-2] == ' ' || tabuleiro[x][y-2] == 79 || tabuleiro[x][y-2] == '@') && (tabuleiro[x-1][y-2] == ' ' || tabuleiro[x-1][y-2] == 79 || tabuleiro[x-1][y-2] == '@') && (tabuleiro[x+1][y-2] == ' ' || tabuleiro[x+1][y-2] == 79 || tabuleiro[x+1][y-2] == '@'))
             return 0;
     }
 
     else if (direcao == 2) /* direita */
     {
-        if ((tabuleiro[ptr_pac->x][(ptr_pac->y)+2] == ' ' || tabuleiro[ptr_pac->x][(ptr_pac->y)+2] == 79 || tabuleiro[ptr_pac->x][(ptr_pac->y)+2] == '@') && (tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)+2] == ' ' || tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)+2] == 79 || tabuleiro[(ptr_pac->x)-1][(ptr_pac->y)+2] == '@') && (tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)+2] == ' ' || tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)+2] == 79 || tabuleiro[(ptr_pac->x)+1][(ptr_pac->y)+2] == '@'))
+        if ((tabuleiro[x][y+2] == ' ' || tabuleiro[x][y+2] == 79 || tabuleiro[x][y+2] == '@') && (tabuleiro[x-1][y+2] == ' ' || tabuleiro[x-1][y+2] == 79 || tabuleiro[x-1][y+2] == '@') && (tabuleiro[x+1][y+2] == ' ' || tabuleiro[x+1][y+2] == 79 || tabuleiro[x+1][y+2] == '@'))
             return 0;
     }
 
     else if (direcao == 3) /* cima */
     {
-        if ((tabuleiro[(ptr_pac->x)-2][ptr_pac->y] == ' ' || tabuleiro[(ptr_pac->x)-2][ptr_pac->y] == 79 || tabuleiro[(ptr_pac->x)-2][ptr_pac->y] == '@') && (tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)-1] == ' ' || tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)-1] == 79 || tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)-1] == '@') && (tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)+1] == ' ' || tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)+1] == 79 || tabuleiro[(ptr_pac->x)-2][(ptr_pac->y)+1] == '@'))
+        if ((tabuleiro[x-2][y] == ' ' || tabuleiro[x-2][y] == 79 || tabuleiro[x-2][y] == '@') && (tabuleiro[x-2][y-1] == ' ' || tabuleiro[x-2][y-1] == 79 || tabuleiro[x-2][y-1] == '@') && (tabuleiro[x-2][y+1] == ' ' || tabuleiro[x-2][y+1] == 79 || tabuleiro[x-2][y+1] == '@'))
             return 0;
     }
 
     else if (direcao == 4) /* baixo */
     {
-        if ((tabuleiro[(ptr_pac->x)+2][ptr_pac->y] == ' ' || tabuleiro[(ptr_pac->x)+2][ptr_pac->y] == 79 || tabuleiro[(ptr_pac->x)+2][ptr_pac->y] == '@') && (tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)-1] == ' ' || tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)-1] == 79 || tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)-1] == '@') && (tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)+1] == ' ' || tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)+1] == 79 || tabuleiro[(ptr_pac->x)+2][(ptr_pac->y)+1] == '@'))
+        if ((tabuleiro[x+2][y] == ' ' || tabuleiro[x+2][y] == 79 || tabuleiro[x+2][y] == '@') && (tabuleiro[x+2][y-1] == ' ' || tabuleiro[x+2][y-1] == 79 || tabuleiro[x+2][y-1] == '@') && (tabuleiro[x+2][y+1] == ' ' || tabuleiro[x+2][y+1] == 79 || tabuleiro[x+2][y+1] == '@'))
             return 0;
     }
 
@@ -1100,10 +1100,128 @@ void delay(int fase)
         usleep((VELOCIDADE - (VELOCIDADE*0.1)) - (0.1*(VELOCIDADE - (VELOCIDADE*0.1))));
 }
 
+int colisao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pacman)
+{
+    /* checa colisao na esquerda */
+    if (tabuleiro[ptr_pacman->x][(ptr_pacman->y)-2] != ' ' && tabuleiro[ptr_pacman->x][(ptr_pacman->y)-2] != 79 && tabuleiro[ptr_pacman->x][(ptr_pacman->y)-2] != '@' && tabuleiro[ptr_pacman->x][(ptr_pacman->y)-2] != 186 && tabuleiro[ptr_pacman->x][(ptr_pacman->y)-2] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)-2] != ' ' && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)-2] != 79 && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)-2] != '@' && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)-2] != 186 && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)-2] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)-2] != ' ' && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)-2] != 79 && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)-2] != '@' && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)-2] != 186 && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)-2] != 205)
+    {
+        return 1;
+    }
+
+    /* checa colisao na direita */
+    if (tabuleiro[ptr_pacman->x][(ptr_pacman->y)+2] != ' ' && tabuleiro[ptr_pacman->x][(ptr_pacman->y)+2] != 79 && tabuleiro[ptr_pacman->x][(ptr_pacman->y)+2] != '@' && tabuleiro[ptr_pacman->x][(ptr_pacman->y)+2] != 186 && tabuleiro[ptr_pacman->x][(ptr_pacman->y)+2] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)+2] != ' ' && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)+2] != 79 && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)+2] != '@' && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)+2] != 186 && tabuleiro[(ptr_pacman->x)-1][(ptr_pacman->y)+2] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)+2] != ' ' && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)+2] != 79 && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)+2] != '@' && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)+2] != 186 && tabuleiro[(ptr_pacman->x)+1][(ptr_pacman->y)+2] != 205)
+    {
+        return 1;
+    }
+
+    /* checa colisao em cima */
+    if (tabuleiro[(ptr_pacman->x)-2][ptr_pacman->y] != ' ' && tabuleiro[(ptr_pacman->x)-2][ptr_pacman->y] != 79 && tabuleiro[(ptr_pacman->x)-2][ptr_pacman->y] != '@' && tabuleiro[(ptr_pacman->x)-2][ptr_pacman->y] != 186 && tabuleiro[(ptr_pacman->x)-2][ptr_pacman->y] != 205)
+    {
+        printf("eh aqui o bicho");
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)-1] != ' ' && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)-1] != 79 && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)-1] != '@' && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)-1] != 186 && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)-1] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)+1] != ' ' && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)+1] != 79 && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)+1] != '@' && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)+1] != 186 && tabuleiro[(ptr_pacman->x)-2][(ptr_pacman->y)+1] != 205)
+    {
+        return 1;
+    }
+
+    /* checa colisao em baixo */
+    if (tabuleiro[(ptr_pacman->x)+2][ptr_pacman->y] != ' ' && tabuleiro[(ptr_pacman->x)+2][ptr_pacman->y] != 79 && tabuleiro[(ptr_pacman->x)+2][ptr_pacman->y] != '@' && tabuleiro[(ptr_pacman->x)+2][ptr_pacman->y] != 186 && tabuleiro[(ptr_pacman->x)+2][ptr_pacman->y] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)-1] != ' ' && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)-1] != 79 && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)-1] != '@' && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)-1] != 186 && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)-1] != 205)
+    {
+        return 1;
+    }
+    if (tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)+1] != ' ' && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)+1] != 79 && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)+1] != '@' && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)+1] != 186 && tabuleiro[(ptr_pacman->x)+2][(ptr_pacman->y)+1] != 205)
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
 void movimentacao_fantasma(char tabuleiro[LINHAS][COLUNAS], struct fantasma *ptr_fantasma)
 {
-    ptr_fantasma->direcao = 1 + (rand() % 4);
-    posiciona_fantasma(tabuleiro, ptr_fantasma);
+    int i, j, direcao_passada;
+    i = rand()%2;
+    j = rand()%2;
+    if ((i || j) == 0)
+    {
+        direcao_passada = ptr_fantasma->direcao;
+        ptr_fantasma->direcao = 1 + (rand() % 4);
+    }
+    if (parede(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao))
+        ptr_fantasma->direcao = direcao_passada;
+    for (i=0; i<4 && parede(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao); i++)
+    {
+        ptr_fantasma->direcao = 1 + (rand() % 4);
+    }
+    switch (ptr_fantasma->direcao)
+    {
+        case 1:
+            if (((ptr_fantasma->y)-2) == 0)
+            {
+                limpa_estrutura(tabuleiro, ptr_fantasma->x, ptr_fantasma->y);
+                ptr_fantasma->y = COLUNAS-2;
+                posiciona_fantasma(tabuleiro, ptr_fantasma);
+            }
+            else
+            {
+                ptr_fantasma->y = ptr_fantasma->y - 1;
+                posiciona_fantasma(tabuleiro, ptr_fantasma);
+                limpa_caminho(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao);
+            }
+            break;
+
+        case 2:
+            if (((ptr_fantasma->y)+2) == COLUNAS-1)
+            {
+                limpa_estrutura(tabuleiro, ptr_fantasma->x, ptr_fantasma->y);
+                ptr_fantasma->y = 1;
+                posiciona_fantasma(tabuleiro, ptr_fantasma);
+            }
+            else
+            {
+                ptr_fantasma->y = ptr_fantasma->y + 1;
+                posiciona_fantasma(tabuleiro, ptr_fantasma);
+                limpa_caminho(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao);
+            }
+            break;
+
+        case 3:
+            ptr_fantasma->x = ptr_fantasma->x - 1;
+            posiciona_fantasma(tabuleiro, ptr_fantasma);
+            limpa_caminho(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao);
+            break;
+
+        case 4:
+            ptr_fantasma->x = ptr_fantasma->x + 1;
+            posiciona_fantasma(tabuleiro, ptr_fantasma);
+            limpa_caminho(tabuleiro, ptr_fantasma->x, ptr_fantasma->y, ptr_fantasma->direcao);
+            break;
+    }
 }
 
 void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase, int *ptr_tecla, struct fantasma *ptr_fantasma1, struct fantasma *ptr_fantasma2, struct fantasma *ptr_fantasma3, struct fantasma *ptr_fantasma4)
@@ -1114,11 +1232,11 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
         case 'a':
         case KEY_LEFT:      /* seta pra esquerda */
             ptr_pac->direcao = 1;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao) && !encerrou(tabuleiro) && !colisao(tabuleiro, ptr_pac)) /* verifica se a próxima posição é a parede */
             {
                 if (((ptr_pac->y)-2) == 0)
                 {
-                    limpa_pacman(tabuleiro, ptr_pac);
+                    limpa_estrutura(tabuleiro, ptr_pac->x, ptr_pac->y);
                     ptr_pac->y = COLUNAS-2;
                     posiciona_pacman(tabuleiro, ptr_pac);
                     movimentacao_fantasma(tabuleiro, ptr_fantasma1);
@@ -1137,7 +1255,7 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     }
                     ptr_pac->y = ptr_pac->y - 1;
                     posiciona_pacman(tabuleiro, ptr_pac);
-                    limpa_caminho(tabuleiro, ptr_pac);
+                    limpa_caminho(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao);
                     mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
                     movimentacao_fantasma(tabuleiro, ptr_fantasma1);
                     movimentacao_fantasma(tabuleiro, ptr_fantasma2);
@@ -1145,35 +1263,46 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
-                    if (espera == 0)
+                    if (espera == 0)   /* guarda ultima instrução para executar quando o caminho estiver livre */
                     {
                         *ptr_tecla = wgetch(stdscr);
                         if (*ptr_tecla == 'd' || *ptr_tecla == KEY_RIGHT || *ptr_tecla == 'w' || *ptr_tecla == KEY_UP || *ptr_tecla == 's' || *ptr_tecla == KEY_DOWN)
                         {
                             direcao = aplica_direcao(*ptr_tecla);
-                            if (!parede(tabuleiro, ptr_pac, direcao))
+                            if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                                 movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                             else
                                 espera = 1; 
                         }
                     }
                     else
-                        if (!parede(tabuleiro, ptr_pac, direcao))
+                        if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                             movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                     if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                         break;
                 }
+            }
+            while(parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao))
+            {
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
+                imprime_tabuleiro(tabuleiro);
+                *ptr_tecla = wgetch(stdscr);
+                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
+                delay(fase);
             }
             break;
 
         case 'd':
         case KEY_RIGHT:	    /* seta pra direita */
             ptr_pac->direcao = 2;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao) && !encerrou(tabuleiro) && !colisao(tabuleiro, ptr_pac)) /* verifica se a próxima posição é a parede */
             {
                 if (((ptr_pac->y)+2) == COLUNAS-1)
                 {
-                    limpa_pacman(tabuleiro, ptr_pac);
+                    limpa_estrutura(tabuleiro, ptr_pac->x, ptr_pac->y);
                     ptr_pac->y = 1;
                     posiciona_pacman(tabuleiro, ptr_pac);
                     movimentacao_fantasma(tabuleiro, ptr_fantasma1);
@@ -1192,7 +1321,7 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     }
                     ptr_pac->y = ptr_pac->y + 1;
                     posiciona_pacman(tabuleiro, ptr_pac);
-                    limpa_caminho(tabuleiro, ptr_pac);
+                    limpa_caminho(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao);
                     mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
                     movimentacao_fantasma(tabuleiro, ptr_fantasma1);
                     movimentacao_fantasma(tabuleiro, ptr_fantasma2);
@@ -1200,35 +1329,46 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
-                    if (espera == 0)
+                    if (espera == 0)   /* guarda ultima instrução para executar quando o caminho estiver livre */
                     {
                         *ptr_tecla = wgetch(stdscr);
                         if (*ptr_tecla == 'e' || *ptr_tecla == KEY_LEFT || *ptr_tecla == 'w' || *ptr_tecla == KEY_UP || *ptr_tecla == 's' || *ptr_tecla == KEY_DOWN)
                         {
                             direcao = aplica_direcao(*ptr_tecla);
-                            if (!parede(tabuleiro, ptr_pac, direcao))
+                            if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                                 movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                             else
                                 espera = 1; 
                         }
                     }
                     else
-                        if (!parede(tabuleiro, ptr_pac, direcao))
+                        if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                             movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                     if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                         break;
                 }
+            }
+            while(parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao))
+            {
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
+                imprime_tabuleiro(tabuleiro);
+                *ptr_tecla = wgetch(stdscr);
+                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
+                delay(fase);
             }
             break;
 
         case 'w':
         case KEY_UP:	/* seta pra cima */
             ptr_pac->direcao = 3;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao) && !encerrou(tabuleiro) && !colisao(tabuleiro, ptr_pac)) /* verifica se a próxima posição é a parede */
             {
                 ptr_pac->x = ptr_pac->x - 1;
                 posiciona_pacman(tabuleiro, ptr_pac);
-                limpa_caminho(tabuleiro, ptr_pac);
+                limpa_caminho(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao);
                 mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
                 movimentacao_fantasma(tabuleiro, ptr_fantasma1);
                 movimentacao_fantasma(tabuleiro, ptr_fantasma2);
@@ -1236,30 +1376,41 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                 movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                 imprime_tabuleiro(tabuleiro);
                 delay(fase);
-                if (espera == 0)
+                if (espera == 0)   /* guarda ultima instrução para executar quando o caminho estiver livre */
                 {
                     *ptr_tecla = wgetch(stdscr);
                     if (*ptr_tecla == 'd' || *ptr_tecla == KEY_RIGHT || *ptr_tecla == 'e' || *ptr_tecla == KEY_LEFT || *ptr_tecla == 's' || *ptr_tecla == KEY_DOWN)
                     {
                         direcao = aplica_direcao(*ptr_tecla);
-                        if (!parede(tabuleiro, ptr_pac, direcao))
+                        if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                             movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                         else
                             espera = 1; 
                     }
                 }
                 else
-                    if (!parede(tabuleiro, ptr_pac, direcao))
+                    if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                         movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                 if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                     break;
+            }
+            while(parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao))
+            {
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
+                imprime_tabuleiro(tabuleiro);
+                *ptr_tecla = wgetch(stdscr);
+                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
+                delay(fase);
             }
             break;
 
         case 's':
         case KEY_DOWN:	    /* seta pra baixo */
             ptr_pac->direcao = 4;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao) && !encerrou(tabuleiro) && !colisao(tabuleiro, ptr_pac)) /* verifica se a próxima posição é a parede */
             {
                 if (tabuleiro[(ptr_pac->x)+2][ptr_pac->y] == '@')    /* checa se é moeda especial, para apagar a moeda inteira */
                 {
@@ -1269,7 +1420,7 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                 }
                 ptr_pac->x = ptr_pac->x + 1;
                 posiciona_pacman(tabuleiro, ptr_pac);
-                limpa_caminho(tabuleiro, ptr_pac);
+                limpa_caminho(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao);
                 mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
                 movimentacao_fantasma(tabuleiro, ptr_fantasma1);
                 movimentacao_fantasma(tabuleiro, ptr_fantasma2);
@@ -1277,23 +1428,34 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                 movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                 imprime_tabuleiro(tabuleiro);
                 delay(fase);
-                if (espera == 0)
+                if (espera == 0)   /* guarda ultima instrução para executar quando o caminho estiver livre */
                 {
                     *ptr_tecla = wgetch(stdscr);
                     if (*ptr_tecla == 'd' || *ptr_tecla == KEY_RIGHT || *ptr_tecla == 'w' || *ptr_tecla == KEY_UP || *ptr_tecla == 'e' || *ptr_tecla == KEY_LEFT)
                     {
                         direcao = aplica_direcao(*ptr_tecla);
-                        if (!parede(tabuleiro, ptr_pac, direcao))
+                        if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                             movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                         else
                             espera = 1; 
                     }
                 }
                 else
-                    if (!parede(tabuleiro, ptr_pac, direcao))
+                    if (!parede(tabuleiro, ptr_pac->x, ptr_pac->y, direcao))
                         movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                 if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                     break;
+            }
+            while(parede(tabuleiro, ptr_pac->x, ptr_pac->y, ptr_pac->direcao))
+            {
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
+                imprime_tabuleiro(tabuleiro);
+                *ptr_tecla = wgetch(stdscr);
+                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
+                delay(fase);
             }
             break;
 
@@ -1330,7 +1492,7 @@ int main()
             posiciona_pacman(tabuleiro, &pacman);
             inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             imprime_tabuleiro(tabuleiro);
-            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
+            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro) && !colisao(tabuleiro, &pacman))
             {
                 tecla = wgetch(stdscr);
                 movimentacao(tabuleiro, &pacman, fase, &tecla, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
@@ -1353,7 +1515,7 @@ int main()
             posiciona_pacman(tabuleiro, &pacman);
             inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             imprime_tabuleiro(tabuleiro);
-            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
+            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro) && !colisao(tabuleiro, &pacman))
             {
                 tecla = wgetch(stdscr);
                 if (tecla == 'a' || tecla == 'w' || tecla == 's' || tecla == 'd' || tecla == KEY_DOWN || tecla == KEY_UP || tecla == KEY_LEFT || tecla == KEY_RIGHT)
@@ -1378,7 +1540,7 @@ int main()
             posiciona_pacman(tabuleiro, &pacman);
             inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             imprime_tabuleiro(tabuleiro);
-            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
+            while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro) && !colisao(tabuleiro, &pacman))
             {
                 tecla = wgetch(stdscr);
                 if (tecla == 'a' || tecla == 'w' || tecla == 's' || tecla == 'd' || tecla == KEY_DOWN || tecla == KEY_UP || tecla == KEY_LEFT || tecla == KEY_RIGHT)
