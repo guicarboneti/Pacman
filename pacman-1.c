@@ -845,12 +845,18 @@ struct pac
     int direcao;
 };
 
+struct fantasma
+{
+    int x;
+    int y;
+    int direcao;
+};
+
 void posiciona_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
 {
     switch (ptr_pac->direcao)
     {
     case 1: /* esquerda */
-
         tabuleiro[ptr_pac->x-1][ptr_pac->y-1] = 220;
         tabuleiro[ptr_pac->x][ptr_pac->y-1] = ' ';
         tabuleiro[ptr_pac->x-1][ptr_pac->y] = 220;
@@ -861,8 +867,8 @@ void posiciona_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
         tabuleiro[ptr_pac->x+1][ptr_pac->y-1] = 223;
         tabuleiro[ptr_pac->x+1][ptr_pac->y+1] = 223;
         break;
-    case 2: /* direita */
 
+    case 2: /* direita */
         tabuleiro[ptr_pac->x-1][ptr_pac->y-1] = 220;
         tabuleiro[ptr_pac->x][ptr_pac->y-1] = 221;
         tabuleiro[ptr_pac->x-1][ptr_pac->y] = 220;
@@ -873,8 +879,8 @@ void posiciona_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
         tabuleiro[ptr_pac->x+1][ptr_pac->y-1] = 223;
         tabuleiro[ptr_pac->x+1][ptr_pac->y+1] = 223;
         break;
-    case 3: /* cima */
 
+    case 3: /* cima */
         tabuleiro[ptr_pac->x-1][ptr_pac->y-1] = 221;
         tabuleiro[ptr_pac->x][ptr_pac->y-1] = 221;
         tabuleiro[ptr_pac->x-1][ptr_pac->y] = ' ';
@@ -885,8 +891,8 @@ void posiciona_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
         tabuleiro[ptr_pac->x+1][ptr_pac->y-1] = 223;
         tabuleiro[ptr_pac->x+1][ptr_pac->y+1] = 223;
         break;
-    case 4: /* baixo */
 
+    case 4: /* baixo */
         tabuleiro[ptr_pac->x-1][ptr_pac->y-1] = 220;
         tabuleiro[ptr_pac->x][ptr_pac->y-1] = 221;
         tabuleiro[ptr_pac->x-1][ptr_pac->y] = 220;
@@ -898,6 +904,83 @@ void posiciona_pacman(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
         tabuleiro[ptr_pac->x+1][ptr_pac->y+1] = 222;
         break;
     }
+}
+
+void posiciona_fantasma(char tabuleiro[LINHAS][COLUNAS], struct fantasma *ptr_fantasma)
+{
+    switch (ptr_fantasma->direcao)
+    {
+    case 1: /* esquerda */
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y-1] = 220;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y-1] = 250;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y] = 220;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y+1] = 220;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y] = 250;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y+1] = 222;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y] = 221;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y-1] = 221;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y+1] = 221;
+        break;
+
+    case 2: /* direita */
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y-1] = 220;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y-1] = 221;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y] = 220;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y+1] = 220;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y] = 250;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y+1] = 250;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y] = 222;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y-1] = 222;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y+1] = 222;
+        break;
+
+    case 3: /* cima */
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y-1] = 221;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y-1] = 223;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y] = 250;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y+1] = 250;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y] = 223;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y+1] = 223;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y] = 222;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y-1] = 222;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y+1] = 222;
+        break;
+
+    case 4: /* baixo */
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y-1] = 221;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y-1] = 220;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y] = 221;
+        tabuleiro[ptr_fantasma->x-1][ptr_fantasma->y+1] = 221;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y] = 220;
+        tabuleiro[ptr_fantasma->x][ptr_fantasma->y+1] = 220;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y] = 250;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y-1] = 250;
+        tabuleiro[ptr_fantasma->x+1][ptr_fantasma->y+1] = 222;
+        break;
+    }
+}
+
+void inicia_fantasmas (char tabuleiro[LINHAS][COLUNAS], struct fantasma *ptr_fantasma1, struct fantasma *ptr_fantasma2, struct fantasma *ptr_fantasma3, struct fantasma *ptr_fantasma4)
+{
+    ptr_fantasma1->x = (LINHAS/2)-4;
+    ptr_fantasma1->y = COLUNAS/2;
+    ptr_fantasma1->direcao = 1;
+    posiciona_fantasma(tabuleiro, ptr_fantasma1);
+
+    ptr_fantasma2->x = LINHAS/2;
+    ptr_fantasma2->y = (COLUNAS/2)-3;
+    ptr_fantasma2->direcao = 3;
+    posiciona_fantasma(tabuleiro, ptr_fantasma2);
+
+    ptr_fantasma3->x = LINHAS/2;
+    ptr_fantasma3->y = COLUNAS/2;
+    ptr_fantasma3->direcao = 4;
+    posiciona_fantasma(tabuleiro, ptr_fantasma3);
+
+    ptr_fantasma4->x = LINHAS/2;
+    ptr_fantasma4->y = (COLUNAS/2)+3;
+    ptr_fantasma4->direcao = 3;
+    posiciona_fantasma(tabuleiro, ptr_fantasma4);
 }
 
 void limpa_caminho(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
@@ -1014,10 +1097,16 @@ void delay(int fase)
     else if (fase == 2)
         usleep(VELOCIDADE - (VELOCIDADE*0.1));
     else if (fase == 3)
-        usleep(VELOCIDADE - (0.1*(VELOCIDADE - (VELOCIDADE*0.1))));
+        usleep((VELOCIDADE - (VELOCIDADE*0.1)) - (0.1*(VELOCIDADE - (VELOCIDADE*0.1))));
 }
 
-void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase, int *ptr_tecla)
+void movimentacao_fantasma(char tabuleiro[LINHAS][COLUNAS], struct fantasma *ptr_fantasma)
+{
+    ptr_fantasma->direcao = 1 + (rand() % 4);
+    posiciona_fantasma(tabuleiro, ptr_fantasma);
+}
+
+void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase, int *ptr_tecla, struct fantasma *ptr_fantasma1, struct fantasma *ptr_fantasma2, struct fantasma *ptr_fantasma3, struct fantasma *ptr_fantasma4)
 {
     int direcao, espera = 0;
     switch (*ptr_tecla)
@@ -1025,13 +1114,17 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
         case 'a':
         case KEY_LEFT:      /* seta pra esquerda */
             ptr_pac->direcao = 1;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
             {
                 if (((ptr_pac->y)-2) == 0)
                 {
                     limpa_pacman(tabuleiro, ptr_pac);
                     ptr_pac->y = COLUNAS-2;
                     posiciona_pacman(tabuleiro, ptr_pac);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
                 }
@@ -1046,6 +1139,10 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     posiciona_pacman(tabuleiro, ptr_pac);
                     limpa_caminho(tabuleiro, ptr_pac);
                     mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
                     if (espera == 0)
@@ -1055,14 +1152,14 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                         {
                             direcao = aplica_direcao(*ptr_tecla);
                             if (!parede(tabuleiro, ptr_pac, direcao))
-                                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                             else
                                 espera = 1; 
                         }
                     }
                     else
                         if (!parede(tabuleiro, ptr_pac, direcao))
-                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                     if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                         break;
                 }
@@ -1072,13 +1169,17 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
         case 'd':
         case KEY_RIGHT:	    /* seta pra direita */
             ptr_pac->direcao = 2;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
             {
                 if (((ptr_pac->y)+2) == COLUNAS-1)
                 {
                     limpa_pacman(tabuleiro, ptr_pac);
                     ptr_pac->y = 1;
                     posiciona_pacman(tabuleiro, ptr_pac);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
                 }
@@ -1093,6 +1194,10 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     posiciona_pacman(tabuleiro, ptr_pac);
                     limpa_caminho(tabuleiro, ptr_pac);
                     mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                    movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                     imprime_tabuleiro(tabuleiro);
                     delay(fase);
                     if (espera == 0)
@@ -1102,14 +1207,14 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                         {
                             direcao = aplica_direcao(*ptr_tecla);
                             if (!parede(tabuleiro, ptr_pac, direcao))
-                                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                                movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                             else
                                 espera = 1; 
                         }
                     }
                     else
                         if (!parede(tabuleiro, ptr_pac, direcao))
-                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                     if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                         break;
                 }
@@ -1119,12 +1224,16 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
         case 'w':
         case KEY_UP:	/* seta pra cima */
             ptr_pac->direcao = 3;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
             {
                 ptr_pac->x = ptr_pac->x - 1;
                 posiciona_pacman(tabuleiro, ptr_pac);
                 limpa_caminho(tabuleiro, ptr_pac);
                 mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                 imprime_tabuleiro(tabuleiro);
                 delay(fase);
                 if (espera == 0)
@@ -1134,14 +1243,14 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     {
                         direcao = aplica_direcao(*ptr_tecla);
                         if (!parede(tabuleiro, ptr_pac, direcao))
-                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                         else
                             espera = 1; 
                     }
                 }
                 else
                     if (!parede(tabuleiro, ptr_pac, direcao))
-                        movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                        movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                 if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                     break;
             }
@@ -1150,7 +1259,7 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
         case 's':
         case KEY_DOWN:	    /* seta pra baixo */
             ptr_pac->direcao = 4;
-            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao)) /* verifica se a próxima posição é a parede */
+            while (!parede(tabuleiro, ptr_pac, ptr_pac->direcao) && !encerrou(tabuleiro)) /* verifica se a próxima posição é a parede */
             {
                 if (tabuleiro[(ptr_pac->x)+2][ptr_pac->y] == '@')    /* checa se é moeda especial, para apagar a moeda inteira */
                 {
@@ -1162,6 +1271,10 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                 posiciona_pacman(tabuleiro, ptr_pac);
                 limpa_caminho(tabuleiro, ptr_pac);
                 mvprintw(37, 77, "%d PTS", checa_pontos(tabuleiro));
+                movimentacao_fantasma(tabuleiro, ptr_fantasma1);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma2);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma3);
+                movimentacao_fantasma(tabuleiro, ptr_fantasma4);
                 imprime_tabuleiro(tabuleiro);
                 delay(fase);
                 if (espera == 0)
@@ -1171,14 +1284,14 @@ void movimentacao(char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase
                     {
                         direcao = aplica_direcao(*ptr_tecla);
                         if (!parede(tabuleiro, ptr_pac, direcao))
-                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                            movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                         else
                             espera = 1; 
                     }
                 }
                 else
                     if (!parede(tabuleiro, ptr_pac, direcao))
-                        movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla);
+                        movimentacao(tabuleiro, ptr_pac, fase, ptr_tecla, ptr_fantasma1, ptr_fantasma2, ptr_fantasma3, ptr_fantasma4);
                 if (*ptr_tecla == 'q' || *ptr_tecla =='Q')
                     break;
             }
@@ -1194,6 +1307,8 @@ int main()
     char tabuleiro[LINHAS][COLUNAS];
     int fase, sair = 0, tecla = 0;
 
+    srand(time(NULL));
+
     initscr();
     noecho();
     nodelay(stdscr, TRUE);
@@ -1201,70 +1316,99 @@ int main()
     keypad(stdscr, true);
 
     struct pac pacman;
-    pacman.x = LINHAS-3;
-    pacman.y = COLUNAS/2;
-    pacman.direcao = 1;
-
-    desenha_jogo(tabuleiro);
-    posiciona_pacman(tabuleiro, &pacman);
-    imprime_tabuleiro(tabuleiro);
+    struct fantasma fantasma1, fantasma2, fantasma3, fantasma4;
     
     for (fase = 1; (fase < 4); fase++)
     {
         if (fase == 1)
         {
+            mvprintw(38, 77, "FASE %d", fase);
             pacman.x = LINHAS-3;
             pacman.y = COLUNAS/2;
+            pacman.direcao = 1;
+            desenha_jogo(tabuleiro);
+            posiciona_pacman(tabuleiro, &pacman);
+            inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
+            imprime_tabuleiro(tabuleiro);
             while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
             {
                 tecla = wgetch(stdscr);
-                movimentacao(tabuleiro, &pacman, fase, &tecla);
+                movimentacao(tabuleiro, &pacman, fase, &tecla, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             }
             if (tecla == 'q' || tecla == 'Q')
+            {
                 endwin();
+                return 1;
+            }
         }
         if (fase == 2)
         {
-            mvprintw(38, 23, "PARABENS, VOCE PASSOU PARA O SEGUNDO NIVEL!");
+            mvprintw(38, 23, "PARABENS, VOCE PASSOU PARA A SEGUNDA FASE!");
             mvprintw(37, 77, "         ");
+            mvprintw(38, 77, "FASE %d", fase);
             pacman.x = LINHAS-3;
             pacman.y = COLUNAS/2;
+            pacman.direcao = 1;
             desenha_jogo(tabuleiro);
             posiciona_pacman(tabuleiro, &pacman);
+            inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             imprime_tabuleiro(tabuleiro);
             while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
             {
                 tecla = wgetch(stdscr);
-                movimentacao(tabuleiro, &pacman, fase, &tecla);
+                if (tecla == 'a' || tecla == 'w' || tecla == 's' || tecla == 'd' || tecla == KEY_DOWN || tecla == KEY_UP || tecla == KEY_LEFT || tecla == KEY_RIGHT)
+                    mvprintw(38, 23, "                                           ");
+                movimentacao(tabuleiro, &pacman, fase, &tecla, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             }
             if (tecla == 'q' || tecla == 'Q')
+            {
                 endwin();
+                return 1;
+            }
         }
         if (fase == 3)
         {
-            mvprintw(38, 23, "PARABENS, VOCE PASSOU PARA O TERCEIRO NIVEL!");
+            mvprintw(38, 23, "PARABENS, VOCE PASSOU PARA A TERCEIRA FASE!");
             mvprintw(37, 77, "         ");
+            mvprintw(38, 77, "FASE %d", fase);
             pacman.x = LINHAS-3;
             pacman.y = COLUNAS/2;
+            pacman.direcao = 1;
             desenha_jogo(tabuleiro);
             posiciona_pacman(tabuleiro, &pacman);
+            inicia_fantasmas(tabuleiro, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             imprime_tabuleiro(tabuleiro);
             while (tecla!= 'q' && tecla != 'Q' && !encerrou(tabuleiro))
             {
                 tecla = wgetch(stdscr);
-                movimentacao(tabuleiro, &pacman, fase, &tecla);
+                if (tecla == 'a' || tecla == 'w' || tecla == 's' || tecla == 'd' || tecla == KEY_DOWN || tecla == KEY_UP || tecla == KEY_LEFT || tecla == KEY_RIGHT)
+                    mvprintw(38, 23, "                                            ");
+                movimentacao(tabuleiro, &pacman, fase, &tecla, &fantasma1, &fantasma2, &fantasma3, &fantasma4);
             }
             if (tecla == 'q' || tecla == 'Q')
+            {
                 endwin();
+                return 1;
+            }
         }
     }
 
 
-    mvprintw(38, 23, "        PARABENS, VOCE GANHOU O JOGO!       ");
+    if (fase == 4 && encerrou(tabuleiro))
+    {
+        mvprintw(38, 23, "       PARABENS, VOCE GANHOU O JOGO!       ");
+        mvprintw(38, 77, "         ");
+    }
     imprime_tabuleiro(tabuleiro);
-    scanf("%c",&tecla);
-    if (tecla == 'q' || tecla == 'Q')
-        endwin();
     
-    return 1;
+    while (1)
+    {
+        tecla = wgetch(stdscr);
+        if (tecla == 'q' || tecla == 'Q')
+        {
+            endwin();
+            return 1;
+        }
+    }
+    
 }
