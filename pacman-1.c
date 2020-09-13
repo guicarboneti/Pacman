@@ -676,17 +676,17 @@ void desenha_moeda(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda m)
     }
 }
 
-void imprime_moedas(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda moedas[154])
+void imprime_moedas(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda moedas[152])
 {
     int i;
-    for (i=0; i<154; i++)
+    for (i=0; i<152; i++)
         desenha_moeda(tabuleiro, moedas[i]);
 }
 
-void apaga_moeda(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda moedas[154], int x, int y)
+void apaga_moeda(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda moedas[152], int x, int y)
 {
     int i;
-    for (i=0; i<154; i++)
+    for (i=0; i<152; i++)
     {
         if ((moedas[i].x == x && moedas[i].y == y) || (moedas[i].x == x && moedas[i].y-1 == y) || (moedas[i].x == x && moedas[i].y+1 == y))
         {
@@ -696,7 +696,7 @@ void apaga_moeda(unsigned char tabuleiro[LINHAS][COLUNAS], struct moeda moedas[1
     }
 }
 
-void inicializa_moedas(struct moeda moedas[154])
+void inicializa_moedas(struct moeda moedas[152])
 {
     int i, j;
     for (i=0, j=2; i<=25 && j<COLUNAS-2; i++, j+=3)
@@ -727,224 +727,224 @@ void inicializa_moedas(struct moeda moedas[154])
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=33, j=COLUNAS-6; i<=35 && j>COLUNAS-12; i++, j-=3)
+    for (i=33, j=COLUNAS-6; i<=34 && j>COLUNAS-12; i++, j-=3)
     {
         moedas[i].x = 8;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=36, j=4; i<=40 && j<13; i++, j+=2)
+    for (i=35, j=4; i<=39 && j<13; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = 14;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=41, j=10; i<=47 && j<23; i++, j+=2)
+    for (i=40, j=10; i<=46 && j<23; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = 11;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=48, j=8; i<=55 && j<23; i++, j+=2)
+    for (i=47, j=8; i<=54 && j<23; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = COLUNAS-12;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=56, j=4; i<=60 && j<13; i++, j+=2)
+    for (i=55, j=4; i<=59 && j<13; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = COLUNAS-15;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=61, j=24; i<=66 && j<37; i++, j+=3)
+    for (i=60, j=24; i<=64 && j<37; i++, j+=3)
     {
         moedas[i].x = 7;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=67, j=43; i<=71 && j<56; i++, j+=3)
+    for (i=65, j=43; i<=69 && j<56; i++, j+=3)
     {
         moedas[i].x = 7;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[72].x = 5;
-    moedas[72].y = 32;
-    moedas[72].aparece = 1;
-    moedas[72].especial = 0;
-    moedas[73].x = 5;
-    moedas[73].y = 48;
-    moedas[73].aparece = 1;
-    moedas[73].especial = 0;
-    for (i=74, j=9; i<=81 && j<24; i++, j+=2)
+    moedas[70].x = 5;
+    moedas[70].y = 32;
+    moedas[70].aparece = 1;
+    moedas[70].especial = 0;
+    moedas[71].x = 5;
+    moedas[71].y = 48;
+    moedas[71].aparece = 1;
+    moedas[71].especial = 0;
+    for (i=72, j=9; i<=79 && j<24; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = 24;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=82, j=9; i<=89 && j<24; i++, j+=2)
+    for (i=80, j=9; i<=87 && j<24; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = 56;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=90, j=18; i<=91 && j<22; i++, j+=3)
+    for (i=88, j=18; i<=89 && j<22; i++, j+=3)
     {
         moedas[i].x = 12;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[92].x = 12;
-    moedas[92].y = COLUNAS-19;
-    moedas[92].aparece = 1;
-    moedas[92].especial = 0;
-    moedas[93].x = 12;
-    moedas[93].y = COLUNAS-22;
-    moedas[93].aparece = 1;
-    moedas[93].especial = 0;
-    for (i=94, j=18; i<=95 && j<23; i++, j+=3)
+    moedas[90].x = 12;
+    moedas[90].y = COLUNAS-19;
+    moedas[90].aparece = 1;
+    moedas[90].especial = 0;
+    moedas[91].x = 12;
+    moedas[91].y = COLUNAS-22;
+    moedas[91].aparece = 1;
+    moedas[91].especial = 0;
+    for (i=92, j=18; i<=93 && j<23; i++, j+=3)
     {
         moedas[i].x = 18;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[96].x = 18;
-    moedas[96].y = 14;
-    moedas[96].aparece = 1;
-    moedas[96].especial = 0;
-    for (i=97, j=COLUNAS-18; i<=98 && j>COLUNAS-24; i++, j-=4)
+    moedas[94].x = 18;
+    moedas[94].y = 14;
+    moedas[94].aparece = 1;
+    moedas[94].especial = 0;
+    for (i=95, j=COLUNAS-18; i<=96 && j>COLUNAS-24; i++, j-=4)
     {
         moedas[i].x = 18;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[99].x = 18;
-    moedas[99].y = COLUNAS-15;
-    moedas[99].aparece = 1;
-    moedas[99].especial = 0;
-    for (i=100, j=27; i<=103 && j<37; i++, j+=3)
+    moedas[97].x = 18;
+    moedas[97].y = COLUNAS-15;
+    moedas[97].aparece = 1;
+    moedas[97].especial = 0;
+    for (i=98, j=27; i<=101 && j<37; i++, j+=3)
     {
         moedas[i].x = 23;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=104, j=44; i<=107 && j<54; i++, j+=3)
+    for (i=102, j=44; i<=105 && j<54; i++, j+=3)
     {
         moedas[i].x = 23;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[108].x = LINHAS-6;
-    moedas[108].y = 32;
-    moedas[108].aparece = 1;
-    moedas[108].especial = 0;
-    moedas[109].x = LINHAS-6;
-    moedas[109].y = 48;
-    moedas[109].aparece = 1;
-    moedas[109].especial = 0;
-    for (i=110, j=20; i<=111 && j<23; i++, j+=2)
+    moedas[106].x = LINHAS-6;
+    moedas[106].y = 32;
+    moedas[106].aparece = 1;
+    moedas[106].especial = 0;
+    moedas[107].x = LINHAS-6;
+    moedas[107].y = 48;
+    moedas[107].aparece = 1;
+    moedas[107].especial = 0;
+    for (i=108, j=20; i<=109 && j<23; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = 16;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=112, j=20; i<=113 && j<23; i++, j+=2)
+    for (i=110, j=20; i<=111 && j<23; i++, j+=2)
     {
         moedas[i].x = j;
         moedas[i].y = COLUNAS-17;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=114, j=6; i<=116 && j<13; i++, j+=3)
+    for (i=112, j=6; i<=114 && j<13; i++, j+=3)
     {
         moedas[i].x = LINHAS-7;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=117, j=COLUNAS-7; i<=119 && j>COLUNAS-14; i++, j-=3)
+    for (i=115, j=COLUNAS-7; i<=117 && j>COLUNAS-14; i++, j-=3)
     {
         moedas[i].x = LINHAS-7;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
+    moedas[118].x = LINHAS-7;
+    moedas[118].y = 16;
+    moedas[118].aparece = 1;
+    moedas[118].especial = 0;
+    moedas[119].x = LINHAS-5;
+    moedas[119].y = 16;
+    moedas[119].aparece = 1;
+    moedas[119].especial = 0;
     moedas[120].x = LINHAS-7;
-    moedas[120].y = 16;
+    moedas[120].y = COLUNAS-17;
     moedas[120].aparece = 1;
     moedas[120].especial = 0;
     moedas[121].x = LINHAS-5;
-    moedas[121].y = 16;
+    moedas[121].y = COLUNAS-6;
     moedas[121].aparece = 1;
     moedas[121].especial = 0;
-    moedas[122].x = LINHAS-7;
+    moedas[122].x = LINHAS-5;
     moedas[122].y = COLUNAS-17;
     moedas[122].aparece = 1;
     moedas[122].especial = 0;
     moedas[123].x = LINHAS-5;
-    moedas[123].y = COLUNAS-6;
+    moedas[123].y = 5;
     moedas[123].aparece = 1;
     moedas[123].especial = 0;
-    moedas[124].x = LINHAS-5;
-    moedas[124].y = COLUNAS-17;
-    moedas[124].aparece = 1;
-    moedas[124].especial = 0;
-    moedas[125].x = LINHAS-5;
-    moedas[125].y = 5;
-    moedas[125].aparece = 1;
-    moedas[125].especial = 0;
-    for (i=126, j=2; i<=137 && j<(COLUNAS/2)-2; i++, j+=3)
+    for (i=124, j=2; i<=135 && j<(COLUNAS/2)-2; i++, j+=3)
     {
         moedas[i].x = LINHAS-3;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    for (i=138, j=(COLUNAS/2)+5; i<=148 && j<COLUNAS-4; i++, j+=3)
+    for (i=136, j=(COLUNAS/2)+5; i<=146 && j<COLUNAS-4; i++, j+=3)
     {
         moedas[i].x = LINHAS-3;
         moedas[i].y = j;
         moedas[i].aparece = 1;
         moedas[i].especial = 0;
     }
-    moedas[149].x = LINHAS-3;
-    moedas[149].y = COLUNAS-3;
-    moedas[149].aparece = 1;
-    moedas[149].especial = 0;
+    moedas[147].x = LINHAS-3;
+    moedas[147].y = COLUNAS-3;
+    moedas[147].aparece = 1;
+    moedas[147].especial = 0;
     
     /* pastilhas especiais */
-    moedas[150].x = 8;
+    moedas[148].x = 8;
+    moedas[148].y = 1;
+    moedas[148].aparece = 1;
+    moedas[148].especial = 1;
+    moedas[149].x = 8;
+    moedas[149].y = COLUNAS-3;
+    moedas[149].aparece = 1;
+    moedas[149].especial = 1;
+    moedas[150].x = LINHAS-7;
     moedas[150].y = 1;
     moedas[150].aparece = 1;
     moedas[150].especial = 1;
-    moedas[151].x = 8;
+    moedas[151].x = LINHAS-7;
     moedas[151].y = COLUNAS-3;
     moedas[151].aparece = 1;
     moedas[151].especial = 1;
-    moedas[152].x = LINHAS-7;
-    moedas[152].y = 1;
-    moedas[152].aparece = 1;
-    moedas[152].especial = 1;
-    moedas[153].x = LINHAS-7;
-    moedas[153].y = COLUNAS-3;
-    moedas[153].aparece = 1;
-    moedas[153].especial = 1;
 }
 
 void imprime_tabuleiro (unsigned char tabuleiro[LINHAS][COLUNAS])
@@ -1056,11 +1056,11 @@ int checa_pontos(unsigned char tabuleiro[LINHAS][COLUNAS], int fase)
     if (fase == 1)
         pts_fase = 0;
     else if (fase == 2)
-        pts_fase = 1940;
+        pts_fase = 1870;
     else if (fase == 3)
-        pts_fase = 1940*2;
+        pts_fase = 1870*2;
 
-    total = pts_fase + (10*(154 - soma)) + (100*((16 - soma_especiais)/4));
+    total = pts_fase + (10*(147 - soma)) + (100*((16 - soma_especiais)/4));
     return total;
 }
 
@@ -1571,7 +1571,7 @@ int achou_moeda(unsigned char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac)
     }
 }
 
-void movimentacao(unsigned char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase, int *ptr_tecla, struct fantasma *ptr_fantasma1, struct fantasma *ptr_fantasma2, struct fantasma *ptr_fantasma3, struct fantasma *ptr_fantasma4, struct moeda moedas[154])
+void movimentacao(unsigned char tabuleiro[LINHAS][COLUNAS], struct pac *ptr_pac, int fase, int *ptr_tecla, struct fantasma *ptr_fantasma1, struct fantasma *ptr_fantasma2, struct fantasma *ptr_fantasma3, struct fantasma *ptr_fantasma4, struct moeda moedas[152])
 {
     int direcao, espera = 0;
     switch (*ptr_tecla)
@@ -1828,7 +1828,7 @@ int main()
 
     struct pac pacman;
     struct fantasma fantasma1, fantasma2, fantasma3, fantasma4;
-    struct moeda moedas[154];
+    struct moeda moedas[152];
     
 
     if(has_colors() == FALSE)
